@@ -5,6 +5,10 @@
     height: auto;
 }
 
+.error{
+    color: red;
+}
+
 .buttons{
     margin-bottom: 10px;
 }

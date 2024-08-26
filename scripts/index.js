@@ -1,14 +1,15 @@
 const grid = document.querySelector(".grid");
 const column = document.querySelector(".column");
-const create = document.querySelector(".createButton");
-const reset = document.querySelector(".resetButton");
+const generate = document.querySelector(".generate");
+const error =  document.querySelector(".error");
+
 let number = 0;
+submitOK = "true";
 
 function createRow(num2){
     const row = document.createElement("div");
     row.classList.add("row");
     column.appendChild(row);
-
     for (i = 0; i < num2; i++){
         const box = document.createElement("div");
         box.classList.add("square");
@@ -21,6 +22,16 @@ function createRow(num2){
 }
 
 function createGrid2(num1, num2){
+    if(num1 > 100){
+        console.log("invalid num1");
+        error.textContent = "ERROR: X/Y value cannot be higher than 100";
+        return 0;
+    }else if(num2 > 100){
+        console.log("invalid num2");
+        error.textContent = "ERROR: X/Y value cannot be higher than 100";
+        return 0;
+    }
+    clearGrid();
     for (var i = 0; i < num1; i++){
         createRow(num2);
         console.log("new row");
@@ -31,24 +42,9 @@ function clearGrid(){
     column.replaceChildren();
 }
 
-create.addEventListener("click", () =>{
-     
-    number = window.prompt("Give me a number");
-    if(number < 100){
-        clearGrid();
-        createGrid2(number, number);
-    }else{
-        console.log("bad input");
-        return 0;
-    }
-})
-
-reset.addEventListener("click", () =>{
-    if(number < 100){
-        clearGrid();
-        createGrid2(number, number);
-    }else{
-        console.log("bad input");
-        return 0;
-    }
+generate.addEventListener("click", () =>{
+    var y = document.getElementById("y-value").value;
+    var x = document.getElementById("x-value").value;
+    error.textContent = "";
+    createGrid2(y, x);
 })
